@@ -44,6 +44,11 @@ ul, li{
 input[type=radio],input[type=checkbox]{
     display: none;
 }
+input[type=text]{
+    width: 100%;
+    height: 3em;
+    line-height: 3em;
+}
 .buttons div:first-child{
     background-color: #5ddaf0;
 }
