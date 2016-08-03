@@ -106,5 +106,60 @@ body{
     right: 11px;
     top: 15px;
     height: 18px;
-    
+}
+.result .project{
+    display: none;
+}
+.result .project .projectTitle{
+    position: relative;
+    padding: 10px 30px;
+    padding-right: 0px;
+    font-size: 15px;
+}
+.result .project .projectTitle .green_{
+    position: absolute;
+    right: 9px;
+    width: 15px;
+    top: 11px;
+}
+.result .project .colorLine{
+    width: 95vw;
+    display: block;
+    margin: 0 auto;
+}
+.result .project table{
+    font-size: 13px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #4ECDB6;
+}
+.result .project table .td1{
+    width: 60vw;
+    padding-left: 30px;
+    line-height: 30px;
+}
+.result .project table .td2{
+    width: 30vw;
+    padding-right: 10px;
+    text-align: right;
+    line-height: 30px;
+}
+.result .project table .td3{
+    width: 10vw;
+    padding-right: 7px;
+    text-align: right;
+    line-height: 30px;
+}
+.result .project table img{
+    width: 15px;
+}
+.result .ad .adBody{
+    padding: 10px;
+    font-size: 13px;
+    border-bottom: 1px solid #4ECDB6;
+}
+.result .ad .foot img{
+    display: block;
+    margin: 5px auto;
+    width: 10px;
 }

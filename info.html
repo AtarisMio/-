@@ -8,6 +8,7 @@
       test
     </title>
     <script src="js/jquery.js"></script>
+    <script src='info.js'></script>
     <link rel="stylesheet" href="info_style.css" />
   </head>
   <body>
@@ -15,15 +16,15 @@
         <img class="leftBar" src="i/leftBar.png" />
         <div class="main">
             <p class="p1">必填信息</p>
-            <div>
-            <table>
+        <div class="table">
+            <table style="width:100%;">
                 <tr>
                     <td class="t1"><span style="color:#52B995;">*</span><p class="tip">姓名</p>:</td>
                     <td class="t2"><input class="name" placeholder="请输入姓名" /></td>
                 </tr>
                 <tr>
                     <td class="t1"><span style="color:#52B995;">*</span><p class="tip">性别</p>:</td>
-                    <td class="t2 sex"><img class="leftBtn" src="i/left.png"></td>
+                    <td class="t2"><input class="sex" /><img class="leftBtn" src="i/left.png"></td>
                 </tr>
                 <tr>
                     <td class="t1"><span style="color:#52B995;">*</span><p class="tip">年龄</p>:</td>
@@ -35,7 +36,7 @@
                 </tr>
                 <tr>
                     <td class="t1"><span style="color:#52B995;">*</span><p class="tip">民族</p>:</td>
-                    <td class="t2 nation"><img class="leftBtn" src="i/left.png"></td>
+                    <td class="t2"><input class="nation" /><img class="leftBtn" src="i/left.png"></td>
                 </tr>
                 <tr>
                     <td class="t1"><span style="color:#52B995;">*</span><p class="tip">身高</p>:</td>
@@ -47,22 +48,24 @@
                 </tr>
                 <tr>
                     <td class="t1"><span style="color:#52B995;">*</span><p class="tip">婚姻状况</p>:</td>
-                    <td class="t2 maritalStatus"><img class="leftBtn" src="i/left.png"></td>
+                    <td class="t2"><input class="maritalStatus" /><img class="leftBtn" src="i/left.png"></td>
                 </tr>
                 <tr>
                     <td class="t1"><span style="color:#52B995;">*</span><p class="tip">文化程度</p>:</td>
-                    <td class="t2 education"><img class="leftBtn" src="i/left.png"></td>
+                    <td class="t2"><input class="education" /><img class="leftBtn" src="i/left.png"></td>
                 </tr>
                 <tr>
                     <td class="t1"><span style="color:#52B995;">*</span><p class="tip">职业</p>:</td>
-                    <td class="t2 job"><img class="leftBtn" src="i/left.png"></td>
+                    <td class="t2"><input class="job" /><img class="leftBtn" src="i/left.png"></td>
                 </tr>
                 <tr>
                     <td class="t1"><span style="color:#52B995;">*</span><p class="tip">医保类别</p>:</td>
-                    <td class="t2 medicalInsurance"><img class="leftBtn" src="i/left.png"></td>
+                    <td class="t2"><input class="medicalInsurance" /><img class="leftBtn" src="i/left.png"></td>
                 </tr>
             </table>
-            </div>
+                        
+        </div>
+            <!--<span style="color:#52B995;">*</span><span>姓名:</span><input class="name" placeholder="请输入姓名" />-->
         </div>  
         <div class="bottomBtn">
             <div class="last">上一步</div><div class="next">下一步</div>
@@ -75,29 +78,63 @@
         </div>
     </div>
     <script>
-        $('.sex').click(function(){
+        var sex=[];
+        var nation=[];
+        var maritalStatus=[];
+        var education=[];
+        var job=[];
+        var medicalInsurance=[];
+
+        function getInfo(data){
+            for(var i = 0;i<data.data[1].answers.length;i++){
+                sex.push(data.data[1].answers[i].answer);
+            }
+            for(var i = 0;i<data.data[4].answers.length;i++){
+                nation.push(data.data[4].answers[i].answer);
+            }
+            for(var i = 0;i<data.data[7].answers.length;i++){
+                maritalStatus.push(data.data[7].answers[i].answer);
+            }
+            for(var i = 0;i<data.data[8].answers.length;i++){
+                education.push(data.data[8].answers[i].answer);
+            }
+            for(var i = 0;i<data.data[9].answers.length;i++){
+                job.push(data.data[9].answers[i].answer);
+            }
+            for(var i = 0;i<data.data[10].answers.length;i++){
+                medicalInsurance.push(data.data[10].answers[i].answer);
+            }
+        }
+        getInfo(data);
+
+        
+
+
+
+
+        $('.sex').focus(function(){
             $('.ccc').show();
-            makeChoiceList('sex','请选择性别',['男性','女性']);
+            makeChoiceList('sex','请选择性别',sex);
         });
-        $('.nation').click(function(){
+        $('.nation').focus(function(){
             $('.ccc').show();
-            makeChoiceList('nation','请选择民族',['汉族','满族','藏族','回族','维吾尔族']);
+            makeChoiceList('nation','请选择民族',nation);
         });
-        $('.maritalStatus').click(function(){
+        $('.maritalStatus').focus(function(){
             $('.ccc').show();
-            makeChoiceList('maritalStatus','请选择婚姻状况',['已婚(含同居)','未婚','丧偶','离异','其他']);
+            makeChoiceList('maritalStatus','请选择婚姻状况',maritalStatus);
         });
-        $('.education').click(function(){
+        $('.education').focus(function(){
             $('.ccc').show();
-            makeChoiceList('education','请选择文化程度',['已婚(含同居)','未婚','丧偶','离异','其他']);
+            makeChoiceList('education','请选择文化程度',education);
         });
-        $('.job').click(function(){
+        $('.job').focus(function(){
             $('.ccc').show();
-            makeChoiceList('job','请选择职业',['公务员','学生','教师','工人','个体户']);
+            makeChoiceList('job','请选择职业',job);
         });
-        $('.medicalInsurance').click(function(){
+        $('.medicalInsurance').focus(function(){
             $('.ccc').show();
-            makeChoiceList('medicalInsurance','请选择医保类别',['1','2','3','4','其他']);
+            makeChoiceList('medicalInsurance','请选择医保类别',medicalInsurance);
         });
 
         function makeChoiceList(className, title, choice){
@@ -118,7 +155,7 @@
             $(choiceList.join('\n')).appendTo(to);
             $('.info .choice').click(function(){
                 that = $(this);
-                $('.'+ className).prepend(that.text());
+                $('.'+ className).val(that.text());
                 $('.ccc').hide();
             });
             $('.cancel').click(function(){
@@ -127,7 +164,14 @@
         }
 
         $('.next').click(function(){
-            if(!$('.name').val() && !$('.sex').val() && !$('.age').val() && !$('.IDNumber').val()){
+            if(Boolean($('.name').val()) && Boolean($('.sex').val()) 
+            && Boolean($('.age').val()) && Boolean($('.IDNumber').val()) 
+            && Boolean($('.height').val()) && Boolean($('.weight').val()) 
+            && Boolean($('.maritalStatus').val()) && Boolean($('.education').val()) 
+            && Boolean($('.job').val()) && Boolean($('.medicalInsurance').val())){
+                console.log('pase');
+            }
+            else{
                 alert('没填完');
             }
         });

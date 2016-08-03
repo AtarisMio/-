@@ -44,21 +44,80 @@
 				<p>1.有高血压风险、糖尿病风险比较严重，另外遗传病症患病风险高。</p>
 				<p class="d">指标详情</p>
 			</div>
+
 			<div class="ad">
 				<div class="title">
 					<img class="leftArrow" src="i/leftArrow.png" />
 					<span>必查项目</span>
 					<img class="rightArrow" src="i/rightArrow.png" />
 				</div>
+				<div class="adBody">
+					必查项目是指根据您的测试我们为您量身定做的体检项目是必须检查的一些项目
+				</div>
+				<div class="foot">
+					<img src="i/bottomArrow_more.png" />
+				</div>
 			</div>
+
 			<div class="ad">
 				<div class="title">
 					<img class="leftArrow" src="i/leftArrow.png" />
-					<span>必查项目</span>
+					<span>推荐检查项目</span>
 					<img class="rightArrow" src="i/rightArrow.png" />
 				</div>
+				<div class="adBody">
+					推荐项目是指根据您的测试我们为您量身定做的体检项目是必须要检查的一些项目
+				</div>
+				<div class="foot">
+					<img src="i/bottomArrow_more.png" />
+				</div>
 			</div>
-    </div>
+
+			<div class="ad">
+				<div class="title">
+					<img class="leftArrow" src="i/leftArrow.png" />
+					<span>深入检查项目</span>
+					<img class="rightArrow" src="i/rightArrow.png" />
+				</div>
+				<div class="project">
+					<p class="projectTitle">组合项一(￥500.00元)<img class="green_" src="i/green_.png" /></p>
+					<img class="colorLine" src="i/colorLine.png" />
+					<table>
+						<tr>
+							<td class="td1">胸部透视</td>
+							<td class="td2">￥100.00元</td>
+							<td class="td3"><img src="i/yellow_.png"></td>
+						</tr>
+						<tr>
+							<td class="td1">肝测试</td>
+							<td class="td2">￥50.00元</td>
+							<td class="td3"><img src="i/yellow_.png"></td>
+						</tr>
+						<tr>
+							<td class="td1">特殊项目</td>
+							<td class="td2">￥100.00元</td>
+							<td class="td3"><img src="i/yellow_.png"></td>
+						</tr>
+						<tr>
+							<td class="td1">眼角膜检查</td>
+							<td class="td2">￥130.00元</td>
+							<td class="td3"><img src="i/yellow_.png"></td>
+						</tr>
+						<tr>
+							<td class="td1">肝功能三项</td>
+							<td class="td2">￥120.00元</td>
+							<td class="td3"><img src="i/yellow_.png"></td>
+						</tr>
+					</table>
+				</div>
+				<div class="adBody">
+					推荐项目是指根据您的测试我们为您量身定做的体检项目是必须要检查的一些项目
+				</div>
+				<div class="foot">
+					<img src="i/bottomArrow_more.png" />
+				</div>
+			</div>
+		<p><br /><br /><br /><br /><br /></p>
 		<script>
 			$('.result .tap td').click(function(){
 				if(this.className == 'jbfx'){
@@ -71,6 +130,14 @@
 					$('.bottomArrow').css('left','67%');
 				}
 			});
+			var n = 1;
+			$('.result .ad .foot').click(function(){
+				$('.result .ad .project').slideToggle();
+				$(".result .ad .foot img").css('transform','rotate(' + 180*n + 'deg)');
+				n++;
+			});
+
+
 		</script>
   </body>
 </html>
