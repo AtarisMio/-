@@ -8,10 +8,32 @@
       result
     </title>
     <script src="js/jquery.js"></script>
+	<script src="result.js"></script>
     <link rel="stylesheet" href="result_style.css" />
+	<script>
+
+		
+	</script>
   </head>
   <body>
     <div class="result">
+		<div class="blackBg">
+			<div class="modal">
+				<div class="modalHeader">
+					<p class="title">名字全称</p>
+
+					<p class="title">检查意义</p>
+
+				</div>
+				<div class="modalBody">
+					<p class="title">注意事项</p>
+
+				</div>
+				<div class="modalFooter">
+					<div class="OK">确定</div>
+				</div>
+			</div>
+		</div>
       <div class="top">
         <h3 class="p1">恭喜您领先于</h3>
       </div>
@@ -34,17 +56,20 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="advice">
-				<p>1.有高血压风险、糖尿病风险比较严重，另外遗传病症患病风险高。</p>
+			<div class="disease">
+				<!--
+				<div class="advice">
+					<p>1.有高血压风险、糖尿病风险比较严重，另外遗传病症患病风险高。</p>
+				</div>
+				<div class="advice">
+					<p>1.有高血压风险、糖尿病风险比较严重，另外遗传病症患病风险高。</p>
+				</div>
+				<div class="advice detail">
+					<p>1.有高血压风险、糖尿病风险比较严重，另外遗传病症患病风险高。</p>
+					<p class="d">指标详情</p>
+				</div>
+				-->
 			</div>
-			<div class="advice">
-				<p>1.有高血压风险、糖尿病风险比较严重，另外遗传病症患病风险高。</p>
-			</div>
-			<div class="advice detail">
-				<p>1.有高血压风险、糖尿病风险比较严重，另外遗传病症患病风险高。</p>
-				<p class="d">指标详情</p>
-			</div>
-
 			<div class="ad">
 				<div class="title">
 					<img class="leftArrow" src="i/leftArrow.png" />
@@ -80,33 +105,33 @@
 					<img class="rightArrow" src="i/rightArrow.png" />
 				</div>
 				<div class="project">
-					<p class="projectTitle">组合项一(￥500.00元)<img class="green_" src="i/green_.png" /></p>
+					<p class="projectTitle">组合项一(￥500.00元)<img class="greenIcon" src="i/green_.png" /></p>
 					<img class="colorLine" src="i/colorLine.png" />
 					<table>
 						<tr>
 							<td class="td1">胸部透视</td>
 							<td class="td2">￥100.00元</td>
-							<td class="td3"><img src="i/yellow_.png"></td>
+							<td class="td3"><img class="icon" src="i/yellow_.png"></td>
 						</tr>
 						<tr>
 							<td class="td1">肝测试</td>
 							<td class="td2">￥50.00元</td>
-							<td class="td3"><img src="i/yellow_.png"></td>
+							<td class="td3"><img class="icon" src="i/yellow_.png"></td>
 						</tr>
 						<tr>
 							<td class="td1">特殊项目</td>
 							<td class="td2">￥100.00元</td>
-							<td class="td3"><img src="i/yellow_.png"></td>
+							<td class="td3"><img class="icon" src="i/yellow_.png"></td>
 						</tr>
 						<tr>
 							<td class="td1">眼角膜检查</td>
 							<td class="td2">￥130.00元</td>
-							<td class="td3"><img src="i/yellow_.png"></td>
+							<td class="td3"><img class="icon" src="i/yellow_.png"></td>
 						</tr>
 						<tr>
 							<td class="td1">肝功能三项</td>
 							<td class="td2">￥120.00元</td>
-							<td class="td3"><img src="i/yellow_.png"></td>
+							<td class="td3"><img class="icon" src="i/yellow_.png"></td>
 						</tr>
 					</table>
 				</div>
@@ -119,25 +144,72 @@
 			</div>
 		<p><br /><br /><br /><br /><br /></p>
 		<script>
+			$(document).ready(function(){
+				
+				$('.tap .jbfxNum').text(getDiseaseRisk.map.DiseaseRisk.length);
+				$('.tap .wxysNum').text(getRiskFactors.map.RiskFactors.length);
+				$('.tap .yhjbNum').text(getDisease.map.Diseases.length);
+				changeDisease(getDiseaseRisk.map.DiseaseRisk);
+			});
+			
+
+			
 			$('.result .tap td').click(function(){
 				if(this.className == 'jbfx'){
 					$('.bottomArrow').css('left','0');
+					changeDisease(getDiseaseRisk.map.DiseaseRisk);
 				}
 				else if(this.className == 'wxys'){
 					$('.bottomArrow').css('left','33%');
+					changeDisease(getRiskFactors.map.RiskFactors);
 				}
 				else if(this.className == 'yhjb'){
 					$('.bottomArrow').css('left','67%');
+					changeDisease(getDisease.map.Diseases);
 				}
 			});
 			var n = 1;
 			$('.result .ad .foot').click(function(){
-				$('.result .ad .project').slideToggle();
-				$(".result .ad .foot img").css('transform','rotate(' + 180*n + 'deg)');
+				$(this).parent().find('.project').slideToggle();
+				$(this).find('img').css('transform','rotate(' + 180*n + 'deg)');
 				n++;
 			});
 
+			//弹出 && 隐藏 modal
+			$('.result .project table .td3 .icon').click(function(){
+				$('.blackBg').show();
+				
+			})
+			$('.result .modal .modalFooter .OK').click(function(){
+				$('.blackBg').hide();
+				
+			})
 
+			function changeDisease(Disease){
+				var disease=[];
+				var to = $('.disease');
+				to.empty();
+				for(var i = 0;i<Disease.length;i++){
+					if(i == Disease.length - 1){
+						disease = disease.concat(['<div class="advice detail">',
+							'<p>',
+								[i+1] + '. ',
+								Disease[i],
+							'</p>',
+							'<p class="d">指标详情</p>',
+						'</div>']);
+					}
+					else{
+						disease = disease.concat(['<div class="advice">',
+							'<p>',
+								[i+1] + '. ',
+								Disease[i],
+							'</p>',
+						'</div>']);
+					}
+				}
+				$(disease.join('\n')).appendTo(to);
+			}
 		</script>
   </body>
 </html>

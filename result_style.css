@@ -116,7 +116,7 @@ body{
     padding-right: 0px;
     font-size: 15px;
 }
-.result .project .projectTitle .green_{
+.result .project .projectTitle .greenIcon{
     position: absolute;
     right: 9px;
     width: 15px;
@@ -162,4 +162,43 @@ body{
     display: block;
     margin: 5px auto;
     width: 10px;
+}
+.result .blackBg{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    display: none;
+}
+.result .modal{
+    width: 280px;
+    margin: 0 auto;
+    margin-top: 100px;
+    padding: 10px 0px;
+    background-color:white;
+    border-radius: 6px; 
+    
+}
+.result .modal .modalHeader{
+    padding: 5px 10px; 
+}
+.result .modal .modalBody{
+    border-top: 1px solid #4ECDB6;
+    border-bottom: 1px solid #4ECDB6;
+    padding: 5px 10px;
+}
+.result .modal .modalFooter{
+    padding-top: 10px;
+}
+.result .modal .modalFooter .OK{
+    background-color: #4ECDB6;
+    padding: 5px 10px;
+    width: 120px;
+    line-height: 25px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
+    color: white;
+    
 }

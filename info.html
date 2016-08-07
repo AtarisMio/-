@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <td class="t1"><span style="color:#52B995;">*</span><p class="tip">性别</p>:</td>
-                    <td class="t2"><input class="sex" /><img class="leftBtn" src="i/left.png"></td>
+                    <td class="t2"><input class="sex" readonly/><img class="leftBtn" src="i/left.png"></td>
                 </tr>
                 <tr>
                     <td class="t1"><span style="color:#52B995;">*</span><p class="tip">年龄</p>:</td>
@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <td class="t1"><span style="color:#52B995;">*</span><p class="tip">民族</p>:</td>
-                    <td class="t2"><input class="nation" /><img class="leftBtn" src="i/left.png"></td>
+                    <td class="t2"><input class="nation" readonly/><img class="leftBtn" src="i/left.png"></td>
                 </tr>
                 <tr>
                     <td class="t1"><span style="color:#52B995;">*</span><p class="tip">身高</p>:</td>
@@ -48,19 +48,19 @@
                 </tr>
                 <tr>
                     <td class="t1"><span style="color:#52B995;">*</span><p class="tip">婚姻状况</p>:</td>
-                    <td class="t2"><input class="maritalStatus" /><img class="leftBtn" src="i/left.png"></td>
+                    <td class="t2"><input class="maritalStatus" readonly/><img class="leftBtn" src="i/left.png"></td>
                 </tr>
                 <tr>
                     <td class="t1"><span style="color:#52B995;">*</span><p class="tip">文化程度</p>:</td>
-                    <td class="t2"><input class="education" /><img class="leftBtn" src="i/left.png"></td>
+                    <td class="t2"><input class="education" readonly/><img class="leftBtn" src="i/left.png"></td>
                 </tr>
                 <tr>
                     <td class="t1"><span style="color:#52B995;">*</span><p class="tip">职业</p>:</td>
-                    <td class="t2"><input class="job" /><img class="leftBtn" src="i/left.png"></td>
+                    <td class="t2"><input class="job" readonly/><img class="leftBtn" src="i/left.png"></td>
                 </tr>
                 <tr>
                     <td class="t1"><span style="color:#52B995;">*</span><p class="tip">医保类别</p>:</td>
-                    <td class="t2"><input class="medicalInsurance" /><img class="leftBtn" src="i/left.png"></td>
+                    <td class="t2"><input class="medicalInsurance" readonly/><img class="leftBtn" src="i/left.png"></td>
                 </tr>
             </table>
                         
@@ -108,7 +108,7 @@
         getInfo(data);
 
         
-
+        
 
 
 
@@ -164,17 +164,80 @@
         }
 
         $('.next').click(function(){
-            if(Boolean($('.name').val()) && Boolean($('.sex').val()) 
-            && Boolean($('.age').val()) && Boolean($('.IDNumber').val()) 
-            && Boolean($('.height').val()) && Boolean($('.weight').val()) 
-            && Boolean($('.maritalStatus').val()) && Boolean($('.education').val()) 
-            && Boolean($('.job').val()) && Boolean($('.medicalInsurance').val())){
-                console.log('pase');
+            var info = {};
+            info.name = $('.name').val();
+            info.sex = $('.sex').val();
+            info.age = $('.age').val();
+            info.height = $('.height').val();
+            info.weight = $('.weight').val();
+            info.IDNumber = $('.IDNumber').val();
+            info.nation = $('.nation').val();
+            info.maritalStatus = $('.maritalStatus').val();
+            info.education = $('.education').val();
+            info.job = $('.job').val();
+            info.medicalInsurance = $('.medicalInsurance').val();
+
+
+            if(Boolean(info.name) && Boolean(info.sex) 
+            && Boolean(info.age) && Boolean(info.height) 
+            && Boolean(info.weight) && Boolean(info.IDNumber) 
+            && Boolean(info.maritalStatus) && Boolean(info.education)
+            && Boolean(info.job) && Boolean(info.medicalInsurance)){
+                localStorage.name=info.name;
+                localStorage.sex=info.sex;
+                localStorage.age=info.age;
+                localStorage.height=info.height;
+                localStorage.weight=info.weight;
+                localStorage.IDNumber=info.IDNumber;
+                localStorage.nation=info.nation;
+                localStorage.maritalStatus=info.maritalStatus;
+                localStorage.education=info.education;
+                localStorage.job=info.job;
+                localStorage.medicalInsurance=info.medicalInsurance;
+                console.log(info);
             }
             else{
                 alert('没填完');
             }
+            window.location.href = 'result.html'
         });
+
+        (function(){
+            console.log('iii');
+            if(localStorage.name){
+                $('.name').val(localStorage.name)
+            }
+            if(localStorage.name){
+                $('.sex').val(localStorage.sex)
+            }
+            if(localStorage.name){
+                $('.age').val(localStorage.age)
+            }
+            if(localStorage.name){
+                $('.height').val(localStorage.height)
+            }
+            if(localStorage.name){
+                $('.weight').val(localStorage.weight)
+            }
+            if(localStorage.name){
+                $('.IDNumber').val(localStorage.IDNumber)
+            }
+            if(localStorage.name){
+                $('.nation').val(localStorage.nation)
+            }
+            if(localStorage.name){
+                $('.maritalStatus').val(localStorage.maritalStatus)
+            }
+            if(localStorage.name){
+                $('.education').val(localStorage.education)
+            }
+            if(localStorage.name){
+                $('.job').val(localStorage.job)
+            }
+            if(localStorage.name){
+                $('.medicalInsurance').val(localStorage.medicalInsurance)
+            }
+        })();
     </script>
   </body>
 </html>
