@@ -1,4 +1,4 @@
-
+var opts = [];
 $.fn.question = function(options){
     var defaults = {
         id: NaN,
@@ -10,40 +10,41 @@ $.fn.question = function(options){
         choice: [],
         show: false
     }
-    var opts = $.extend({}, defaults, options), _this = this;
+    var opt = $.extend({}, defaults, options), _this = this;
+    opts[opt.id] = opt;
     /** 获取答案 */
     this.getAnswer = function(){
-        opts.answer.lenght = 0;
-        switch(opts.type){
+        opt.answer.lenght = 0;
+        switch(opt.type){
             case 'single':
-                opts.answer.push($(_this).find('input:checked').val());
+                opt.answer.push($(_this).find('input:checked').val());
                 break;
             case 'multiple':
                 $.each($(_this).find('input:checked'),function(index,element){
-                    opts.answer.push(element.val());
+                    opt.answer.push(element.val());
                 });
                 break;
             case 'essay':
-                opts.answer.push($(_this).find('input').val());
+                opt.answer.push($(_this).find('input').val());
                 break;
             default:
                 break;
         }
-        return opts.answer;
+        return opt.answer;
     }
     /** 设置答案 */
     this.setAnswer = function(){
-        switch(opts.type){
+        switch(opt.type){
             case 'single':
-                $(_this).find('input[value='+opts.answer[0]+']').prop('checked',true)
+                $(_this).find('input[value='+opt.answer[0]+']').prop('checked',true)
                 break;
             case 'multiple':
-                $.each(opts.answer,function(index,element){
+                $.each(opt.answer,function(index,element){
                     $(_this).find('input[value='+element+']').prop('checked',true)
                 });
                 break;
             case 'essay':
-                $(_this).find('input').val(opts.answer[0])
+                $(_this).find('input').val(opt.answer[0])
                 break;
             default:
                 break;
@@ -56,42 +57,52 @@ $.fn.question = function(options){
             type: 'get',
             success: function(data) {
                 $(_this).html(data);
-                $(_this).prop('id', 'q'+opts.id).addClass('question');
-                if(!opts.show)
+                $(_this).prop('id', 'q'+opt.id).addClass('question');
+                if(opt.show=='false')
                     $(_this).hide();
-                $(_this).find('.question_content').text(opts.title);
-                if(opts.pic){
-                    $(_this).find('.question_img img').prop('src', opts.pic);
-                    $(_this).find('._tip2').text(opts.tip);
+                $(_this).find('.question_content').text(opt.title);
+                if(opt.pic){
+                    $(_this).find('.question_img img').prop('src', opt.pic);
+                    $(_this).find('._tip2').text(opt.tip);
                 }
                 else{
                     $(_this).find('.question_img').hide();
-                    $(_this).find('._tip1').text(opts.tip);
+                    $(_this).find('._tip1').text(opt.tip);
                 }
-                if(opts.type==="essay"){
-                    $('.question_list').html('<li><input type="text" name="q'+opts.id+'" id="a'+opts.choice[0].id+'" data-condition='+element.condition+' /></li>');
+                if(opt.type==="essay"){
+                    $(_this).find('.question_list').html('<li><input type="text" name="q'+opt.id+'" id="a'+opt.choice[0].id+'" data-condition='+element.condition+' /></li>');
                 }
                 else{
                     var str = "",type = 'radio';
-                    if(opts.type === 'single')
+                    if(opt.type === 'single')
                         type = 'radio';
-                    else if(opts.type === 'multiple')
+                    else if(opt.type === 'multiple')
                         type = 'checkbox';
-                    $.each(opts.choice, function(index, element) {
-                        str+='<li><input type="'+type+'" name="q'+opts.id+'" id="a'+element.id+'" data-condition='+element.condition+' /><label for="a'+element.id+'">'+element.answer+'</label></li>'
+                    $.each(opt.choice, function(index, element) {
+                        str+='<li><input type="'+type+'" name="q'+opt.id+'" id="a'+element.id+'" data-condition='+JSON.stringify(element.condition)+' /><label for="a'+element.id+'">'+element.answer+'</label></li>'
                     });
-                    $('.question_list').html(str);
+                    $(_this).find('.question_list').html(str);
                 }
                 $.each($(_this).find('input[data-condition]'), function(index, element_out) {
                     $(element_out).click(function(){
+                        $.each($(_this).find('input[data-condition]'),function(index, _element){
+                            $.each($(_element).data('condition'),function(index, _c){
+                                $('#q'+_c).hide();
+                            });
+                        });
                         if($(this).prop('checked')){
                             $.each($(this).data('condition'), function(index, element_in) {
                                 $('#q'+element_in).show();
                             });
-                        }else{
-                            $.each($(this).data('condition'), function(index, element_in) {
-                                $('#q'+element_in).hide();
-                            });
+                        }
+                        if ($(this).prop('type') === 'radio') {
+                            try{
+                                var elements = $(_this).next();
+                                if(elements.length > 0)
+                                    $('.content').animate({scrollTop:$(elements[0]).offset().top - $('.content>:first-child').offset().top});
+                            }catch(e){
+                                console.log(e);
+                            }
                         }
                     });
                 });
