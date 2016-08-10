@@ -12,10 +12,10 @@
     color: #ff613c;
     font-size: 90%;
     padding: 0 10px;
+    margin-top: -0.5em;
 }
 .question .question_split{
     width: 100%;
-    margin-top: -1em;
 }
 .question .question_split img{
     min-height: 1px;
