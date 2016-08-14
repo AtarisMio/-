@@ -84,25 +84,62 @@
         var education=[];
         var job=[];
         var medicalInsurance=[];
+        
 
         function getInfo(data){
             for(var i = 0;i<data.data[1].answers.length;i++){
-                sex.push(data.data[1].answers[i].answer);
+                var a = {
+                    'type':data.data[1].type,
+                    'subject':data.data[1].id,
+                    'id':data.data[1].answers[i].id,
+                    'answer':data.data[1].answers[i].answer,
+                }
+                sex.push(a);
             }
             for(var i = 0;i<data.data[4].answers.length;i++){
-                nation.push(data.data[4].answers[i].answer);
+                var a = {
+                    'type':data.data[4].type,
+                    'subject':data.data[4].id,
+                    'id':data.data[4].answers[i].id,
+                    'answer':data.data[4].answers[i].answer,
+                }
+                nation.push(a);
             }
             for(var i = 0;i<data.data[7].answers.length;i++){
-                maritalStatus.push(data.data[7].answers[i].answer);
+                var a = {
+                    'type':data.data[7].type,
+                    'subject':data.data[7].id,
+                    'id':data.data[7].answers[i].id,
+                    'answer':data.data[7].answers[i].answer,
+                }
+                maritalStatus.push(a);
             }
             for(var i = 0;i<data.data[8].answers.length;i++){
-                education.push(data.data[8].answers[i].answer);
+                var a = {
+                    'type':data.data[8].type,
+                    'subject':data.data[8].id,
+                    'id':data.data[8].answers[i].id,
+                    'answer':data.data[8].answers[i].answer,
+                }
+                education.push(a);
             }
             for(var i = 0;i<data.data[9].answers.length;i++){
-                job.push(data.data[9].answers[i].answer);
+                var a = {
+                    'type':data.data[9].type,
+                    'subject':data.data[9].id,
+                    'id':data.data[9].answers[i].id,
+                    'answer':data.data[9].answers[i].answer,
+                }
+                job.push(a);
             }
             for(var i = 0;i<data.data[10].answers.length;i++){
-                medicalInsurance.push(data.data[10].answers[i].answer);
+                var a = {
+                    'type':data.data[10].type,
+                    'subject':data.data[10].id,
+                    'id':data.data[10].answers[i].id,
+                    'answer':data.data[10].answers[i].answer,
+                }
+                medicalInsurance.push(a);
             }
         }
         getInfo(data);
@@ -144,10 +181,10 @@
             choiceList = choiceList.concat(['<p class="title">',title,'</p>']);
             choiceList.push('<div class="chooseListBox">');
             for(var i = 0; i < choice.length; i++){
-                if($('.'+ className).val() == choice[i]){
-                    choiceList = choiceList.concat(['<div class="choiceLine">','<p class="choice active">', choice[i] ,'</p>','</div>']);
+                if($('.'+ className).val() == choice[i].answer){
+                    choiceList = choiceList.concat(['<div class="choiceLine">','<p class="choice active">', choice[i].answer ,'</p>','</div>']);
                 }else{
-                    choiceList = choiceList.concat(['<div class="choiceLine">','<p class="choice">', choice[i] ,'</p>','</div>']);
+                    choiceList = choiceList.concat(['<div class="choiceLine">','<p class="choice">', choice[i].answer ,'</p>','</div>']);
                 }
             }
             choiceList.push('</div>');
@@ -164,46 +201,92 @@
         }
 
         $('.next').click(function(){
-            var info = {};
-            info.name = $('.name').val();
-            info.sex = $('.sex').val();
-            info.age = $('.age').val();
-            info.height = $('.height').val();
-            info.weight = $('.weight').val();
-            info.IDNumber = $('.IDNumber').val();
-            info.nation = $('.nation').val();
-            info.maritalStatus = $('.maritalStatus').val();
-            info.education = $('.education').val();
-            info.job = $('.job').val();
-            info.medicalInsurance = $('.medicalInsurance').val();
+            var info = [];//上传信息
+            var info_name = {
+                "type": "essay",
+                "subject": "1",
+                "answer": $('.name').val(),
+            }
+            var info_age = {
+                "type": "essay",
+                "subject": "3",
+                "answer": $('.age').val(),
+            }
+            var info_IDNumber = {
+                "type": "essay",
+                "subject": "4",
+                "answer": $('.IDNumber').val(),
+            }
+            var info_height = {
+                "type": "essay",
+                "subject": "4",
+                "answer": $('.height').val(),
+            }
+            var info_weight = {
+                "type": "essay",
+                "subject": "4",
+                "answer": $('.weight').val(),
+            }
+            info.push(info_name);
+            info = PrepareInfo(sex,'sex',info);
+            info.push(info_age);
+            info.push(info_IDNumber);
+            info = PrepareInfo(nation,'nation',info);
+            info.push(info_height);
+            info.push(info_weight);
+            info = PrepareInfo(maritalStatus,'maritalStatus',info);
+            info = PrepareInfo(education,'education',info);
+            info = PrepareInfo(job,'job',info);
+            info = PrepareInfo(medicalInsurance,'medicalInsurance',info);
 
 
-            if(Boolean(info.name) && Boolean(info.sex) 
-            && Boolean(info.age) && Boolean(info.height) 
-            && Boolean(info.weight) && Boolean(info.IDNumber) 
-            && Boolean(info.maritalStatus) && Boolean(info.education)
-            && Boolean(info.job) && Boolean(info.medicalInsurance)){
-                localStorage.name=info.name;
-                localStorage.sex=info.sex;
-                localStorage.age=info.age;
-                localStorage.height=info.height;
-                localStorage.weight=info.weight;
-                localStorage.IDNumber=info.IDNumber;
-                localStorage.nation=info.nation;
-                localStorage.maritalStatus=info.maritalStatus;
-                localStorage.education=info.education;
-                localStorage.job=info.job;
-                localStorage.medicalInsurance=info.medicalInsurance;
-                console.log(info);
+
+
+
+
+
+            if(Boolean($('.name').val()) && Boolean($('.sex').val()) 
+            && Boolean($('.age').val()) && Boolean($('.height').val()) 
+            && Boolean($('.weight').val()) && Boolean($('.IDNumber').val()) 
+            && Boolean($('.maritalStatus').val()) && Boolean($('.education').val())
+            && Boolean($('.job').val()) && Boolean($('.medicalInsurance').val())){
+                localStorage.name = $('.name').val();
+                localStorage.sex = $('.sex').val();
+                localStorage.age = $('.age').val();
+                localStorage.height = $('.height').val();
+                localStorage.weight = $('.weight').val();
+                localStorage.IDNumber = $('.IDNumber').val();
+                localStorage.nation = $('.nation').val();
+                localStorage.maritalStatus = $('.maritalStatus').val();
+                localStorage.education = $('.education').val();
+                localStorage.job = $('.job').val();
+                localStorage.medicalInsurance = $('.medicalInsurance').val();
+
+                localStorage.info = JSON.stringify(info);
             }
             else{
                 alert('没填完');
             }
-            window.location.href = 'result.html'
+            //window.location.href = 'result.html' FIX 这里跳转
         });
 
+        function PrepareInfo(x,className,ret){
+            var ans = $('.' + className).val();
+            for(var i = 0;i < x.length;i++){
+                if(ans == x[i].answer){
+                    var t = {
+                        "type": x[i].type,
+                        "subject": x[i].subject,
+                        "answer": x[i].subject,
+                    }
+                    ret.push(t);
+                }
+            }
+            return ret;
+        }
+
+
         (function(){
-            console.log('iii');
             if(localStorage.name){
                 $('.name').val(localStorage.name)
             }
