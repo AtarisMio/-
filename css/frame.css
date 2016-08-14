@@ -19,7 +19,7 @@ ul, li{
 .status{
     height: 88vh;
     position: fixed;
-    left: 0;
+    left: 2vh;
     top: 2vh;
     z-index: 100;
 }

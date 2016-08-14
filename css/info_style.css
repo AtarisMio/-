@@ -13,8 +13,9 @@
     top:12px;
 }
 .info .main{
-    margin-left: 45px;
+    margin-left: 8.2vh;
     font-size: 15px;
+    min-height: 100vh;
 }
 .info .p1{
     font-size: 15px;
@@ -22,10 +23,15 @@
     color:#52B995;
     border-bottom: 1px solid #C1AE98;
 }
+.info .table{
+    width: 95%;
+    height: 87vh;
+    position: relative;
+}
 .info table{
-    position: absolute;
-    top: 36px;
-    right: 0px;
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 .info .t1{
     line-height: 35px;
@@ -58,16 +64,18 @@
 }
 .info .t2 input{
     border: 0px;
-    display: inline-block;
+    display: block;
+    float: left;
     line-height: 35px;
     height: 39px;
     font-size: 14px;
-    width: 160px;
+    min-width: 1px;
+    width: calc(100% - 2.2em);
 }
 .info .t2 .leftBtn{
     vertical-align: middle;
-    width: 7px;
-    margin-left: 20px;
+    width: 0.5em;
+    margin-left: 1.5em;
 }
 
 

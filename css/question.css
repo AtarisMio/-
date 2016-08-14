@@ -35,7 +35,7 @@
     display: block;
     position: absolute;
     bottom: 0;
-    background-image: url("img/border_bottom.png");
+    background-image: url("../img/border_bottom.png");
     background-repeat: repeat-x;
     background-size: contain;
     width: 100%;

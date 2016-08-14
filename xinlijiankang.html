@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link href="css/frame.css" rel="stylesheet">
+        <link href="css/question.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="status">
+            <img src="img/5.png" alt="">
+        </div>
+        <div class="content">
+        </div>
+        <div class="buttons">
+            <div id="pre">
+                上一步
+            </div>
+            <div id="next">
+                下一步
+            </div>
+        </div>
+    </body>
+    <script src="js/jquery.js"></script>
+    <script src="js/lodash.min.js"></script>
+    <script src="js/question.js"></script>
+    <script src="js/loadquestion.js"></script>
+    <script>
+        getData("心理健康");
+        //按下一步
+        $('#next').click(function(){
+            var answers = [], finished = true;
+            _.each($('.question').filter(function(){return $(this).css('display')==="block"}),function(value){
+                var answer = $(value).getAnswer();
+                if($.isEmptyObject(answer)){
+                    $('.content').animate({scrollTop:$(value).offset().top - $('.content>:first-child').offset().top});
+                    finished = false;
+                    return false;
+                }
+                answers.push(answer);
+            });
+            if(!finished)
+                return;
+            //localStorage.setItem(theme+'_answer',JSON.stringify(answers));
+            var info = JSON.parse(localStorage.getItem('个人信息_answer'));
+            var jiankang = JSON.parse(localStorage.getItem('健康史_answer'));
+            var quti = JSON.parse(localStorage.getItem('躯体症状_answer'));
+            var shenghuo = JSON.parse(localStorage.getItem('生活习惯_answer'));
+            answers = answer.concat(info);
+            answers = answer.concat(jiankang);
+            answers = answer.concat(quti);
+            answers = answer.concat(shenghuo);
+            $.ajax({
+                url: '/front/ques/getSheet',
+                type: 'get',
+                success: function(data){
+                    localStorage.setItem('sheetId', data.data);
+                    $.ajax({
+                        url: '/front/ques/answer',
+                        type: 'post',
+                        data: {sheetId: data.data, json: JSON.stringify(answers)},
+                        success: function(){
+                            localStorage.removeItem('个人信息_answer');
+                            localStorage.removeItem('健康史_answer');
+                            localStorage.removeItem('躯体症状_answer');
+                            localStorage.removeItem('生活习惯_answer');
+                            localStorage.removeItem('个人信息');
+                            localStorage.removeItem('健康史');
+                            localStorage.removeItem('躯体症状');
+                            localStorage.removeItem('生活习惯');
+                            localStorage.removeItem('心理健康');
+                            window.location.href = 'result.html';
+                        }
+                    });
+                }
+            });
+        });
+        //按上一步
+        $('#pre').click(function(){
+            window.location.href = 'shenghuoxiguan.html';
+        });
+    </script>
+</html>

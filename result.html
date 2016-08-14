@@ -8,8 +8,8 @@
       result
     </title>
     <script src="js/jquery.js"></script>
-	<script src="result.js"></script>
-    <link rel="stylesheet" href="result_style.css" />
+    <link rel="stylesheet" href="css/result_style.css" />
+    <link rel="stylesheet" href="css/canvas.css" />
 	<script>
 
 		
@@ -36,21 +36,25 @@
 		</div>
       <div class="top">
         <h3 class="p1">恭喜您领先于</h3>
+        <canvas id="myCanvas" width="150px" height="150px">
+		您的浏览器不支持canvas标签。
+		</canvas>
+		<span class="percent"></span>
       </div>
 			<table class="tap">
 				<tbody>
 					<tr>
 						<td class="jbfx">
-							<img class="icon" src="i/jbfx.png" />
+							<img class="icon" src="img/jbfx.png" />
 							<div class="jbfxNum">3</div><span>疾病风险</span>
-							<img class="bottomArrow" src="i/bottomArrow.png" />
+							<img class="bottomArrow" src="img/bottomArrow.png" />
 						</td>
 						<td class="wxys">
-							<img class="icon" src="i/wxys.png" />
+							<img class="icon" src="img/wxys.png" />
 							<div class="wxysNum">1</div><span>危险因素</span>
 						</td>
 						<td class="yhjb">
-							<img class="icon" src="i/yhjb.png" />
+							<img class="icon" src="img/yhjb.png" />
 							<div class="yhjbNum">0</div><span>已患疾病</span>
 						</td>
 					</tr>
@@ -72,66 +76,66 @@
 			</div>
 			<div class="ad">
 				<div class="title">
-					<img class="leftArrow" src="i/leftArrow.png" />
+					<img class="leftArrow" src="img/leftArrow.png" />
 					<span>必查项目</span>
-					<img class="rightArrow" src="i/rightArrow.png" />
+					<img class="rightArrow" src="img/rightArrow.png" />
 				</div>
 				<div class="adBody">
 					必查项目是指根据您的测试我们为您量身定做的体检项目是必须检查的一些项目
 				</div>
 				<div class="foot">
-					<img src="i/bottomArrow_more.png" />
+					<img src="img/bottomArrow_more.png" />
 				</div>
 			</div>
 
 			<div class="ad">
 				<div class="title">
-					<img class="leftArrow" src="i/leftArrow.png" />
+					<img class="leftArrow" src="img/leftArrow.png" />
 					<span>推荐检查项目</span>
-					<img class="rightArrow" src="i/rightArrow.png" />
+					<img class="rightArrow" src="img/rightArrow.png" />
 				</div>
 				<div class="adBody">
 					推荐项目是指根据您的测试我们为您量身定做的体检项目是必须要检查的一些项目
 				</div>
 				<div class="foot">
-					<img src="i/bottomArrow_more.png" />
+					<img src="img/bottomArrow_more.png" />
 				</div>
 			</div>
 
 			<div class="ad">
 				<div class="title">
-					<img class="leftArrow" src="i/leftArrow.png" />
+					<img class="leftArrow" src="img/leftArrow.png" />
 					<span>深入检查项目</span>
-					<img class="rightArrow" src="i/rightArrow.png" />
+					<img class="rightArrow" src="img/rightArrow.png" />
 				</div>
 				<div class="project">
-					<p class="projectTitle">组合项一(￥500.00元)<img class="greenIcon" src="i/green_.png" /></p>
-					<img class="colorLine" src="i/colorLine.png" />
+					<p class="projectTitle">组合项一(￥500.00元)<img class="greenIcon" src="img/green_.png" /></p>
+					<img class="colorLine" src="img/colorLine.png" />
 					<table>
 						<tr>
 							<td class="td1">胸部透视</td>
 							<td class="td2">￥100.00元</td>
-							<td class="td3"><img class="icon" src="i/yellow_.png"></td>
+							<td class="td3"><img class="icon" src="img/yellow_.png"></td>
 						</tr>
 						<tr>
 							<td class="td1">肝测试</td>
 							<td class="td2">￥50.00元</td>
-							<td class="td3"><img class="icon" src="i/yellow_.png"></td>
+							<td class="td3"><img class="icon" src="img/yellow_.png"></td>
 						</tr>
 						<tr>
 							<td class="td1">特殊项目</td>
 							<td class="td2">￥100.00元</td>
-							<td class="td3"><img class="icon" src="i/yellow_.png"></td>
+							<td class="td3"><img class="icon" src="img/yellow_.png"></td>
 						</tr>
 						<tr>
 							<td class="td1">眼角膜检查</td>
 							<td class="td2">￥130.00元</td>
-							<td class="td3"><img class="icon" src="i/yellow_.png"></td>
+							<td class="td3"><img class="icon" src="img/yellow_.png"></td>
 						</tr>
 						<tr>
 							<td class="td1">肝功能三项</td>
 							<td class="td2">￥120.00元</td>
-							<td class="td3"><img class="icon" src="i/yellow_.png"></td>
+							<td class="td3"><img class="icon" src="img/yellow_.png"></td>
 						</tr>
 					</table>
 				</div>
@@ -139,21 +143,51 @@
 					推荐项目是指根据您的测试我们为您量身定做的体检项目是必须要检查的一些项目
 				</div>
 				<div class="foot">
-					<img src="i/bottomArrow_more.png" />
+					<img src="img/bottomArrow_more.png" />
 				</div>
 			</div>
 		<p><br /><br /><br /><br /><br /></p>
+    	<script src="js/rate.js"></script>
 		<script>
-			$(document).ready(function(){
-				
-				$('.tap .jbfxNum').text(getDiseaseRisk.map.DiseaseRisk.length);
-				$('.tap .wxysNum').text(getRiskFactors.map.RiskFactors.length);
-				$('.tap .yhjbNum').text(getDisease.map.Diseases.length);
-				changeDisease(getDiseaseRisk.map.DiseaseRisk);
-			});
+			var _data = {sheetId: localStorage.getItem('sheetId')};
+			var getDiseaseRisk,getRiskFactors,getDisease;
+			$.ajax({
+	            url: '/front/ques/getDiseaseRisk',
+	            data: _data,
+	            type: 'get',
+	            success: function(data){
+	                if(data.state=='0'){
+	                	getDiseaseRisk = data;
+	                	$('.tap .jbfxNum').text(getDiseaseRisk.map.DiseaseRisk.length);
+	                	changeDisease(getDiseaseRisk.map.DiseaseRisk);
+	                }
+	            }
+	        });
+			$.ajax({
+	            url: '/front/ques/getRiskFactors',
+	            data: _data,
+	            type: 'get',
+	            success: function(data){
+	                if(data.state=='0'){
+	                	getRiskFactors = data;
+	                	$('.tap .jbfxNum').text(getRiskFactors.map.DiseaseRisk.length);
+	                }
+	            }
+	        });
+			$.ajax({
+	            url: '/front/ques/getDisease',
+	            data: _data,
+	            type: 'get',
+	            success: function(data){
+	                if(data.state=='0'){
+	                	getDisease = data;
+	                	$('.tap .jbfxNum').text(getDisease.map.DiseaseRisk.length);
+	                }
+	            }
+	        });
 			
 
-			
+			setRate(70);
 			$('.result .tap td').click(function(){
 				if(this.className == 'jbfx'){
 					$('.bottomArrow').css('left','0');
@@ -211,5 +245,6 @@
 				$(disease.join('\n')).appendTo(to);
 			}
 		</script>
+
   </body>
 </html>

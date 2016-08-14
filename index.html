@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <title>健康自测提示</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="tips.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/tips.css">
 </head>
 <body>
     <div class="block promise">
         <div class="border border_top">
-            <img src="../img/promise_top.png" alt="">
+            <img src="img/promise_top.png" alt="">
             <span>郑重承诺</span>
         </div>
         <p>所有资料信息仅用于对您个人的健康管理和科学研究，在没有得到您授权的情况下，绝不提供给其他单位或机构</p>
         <div class="border border_bottom">
-            <img src="../img/promise_bottom.png" alt="">
+            <img src="img/promise_bottom.png" alt="">
         </div>
     </div>
     <div class="block last">
@@ -23,9 +23,11 @@
         </p>
         <div class="buttons">
             <input type="checkbox" id="agree" checked>
-            <label for="agree"><img class="icon radio no_selected" src="../img/no_selected.png" alt=""><img class="icon radio selected" src="../img/selected.png" alt="">已阅读并同意该提示</label>
-            <div class="button single_button">确 定</div>
+            <label for="agree"><img class="icon radio no_selected" src="img/no_selected.png" alt=""><img class="icon radio selected" src="img/selected.png" alt="">已阅读并同意该提示</label>
+            <div id="next" class="button single_button">确 定</div>
         </div>
     </div>
+    <script type="text/javascript" src="js/zepto.min.js"></script>
+    <script type="text/javascript" src="js/tips.js"></script>
 </body>
 </html>

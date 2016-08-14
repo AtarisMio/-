@@ -22,7 +22,8 @@ function getData(dataType){
     data = localStorage.getItem(dataType)
     if(data===null)
         $.ajax({
-            url: '1.json',
+            // url: '1.json',//测试从json读取
+            url: '/front/ques/index',
             data: dataType,
             type: 'get',
             success: function(data){
